@@ -77,7 +77,7 @@ class HomeViewBody extends StatelessWidget {
                   child: Stack(
                     children: [
                       ListView.builder(
-                        //physics: const NeverScrollableScrollPhysics(),
+                        // physics: const NeverScrollableScrollPhysics(),
                         padding: EdgeInsets.zero,
                         itemCount:
                         BlocProvider.of<MovieCubit>(context).movies.length,

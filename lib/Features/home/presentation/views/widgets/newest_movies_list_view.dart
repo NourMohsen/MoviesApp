@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movies_app/Features/home/presentation/views/widgets/custom_movie_item.dart';
+import 'package:movies_app/Features/home/presentation/views/widgets/masked_image.dart';
 import 'package:movies_app/constants.dart';
 import 'package:movies_app/core/utils/styles.dart';
 import '../../../../../core/utils/app_router.dart';
@@ -33,8 +34,8 @@ final Results model;
             //   width: 110,
             //   decoration: BoxDecoration(
             //     borderRadius: BorderRadius.circular(20),
-            //     image: DecorationImage(image: NetworkImage(image))
             //   ),
+            //     child: MaskedImage(asset: image,mask:kMaskCenter,isAsset: false,)
             // ),
             CustomMovieImage(imageUrl: image),
             const SizedBox(

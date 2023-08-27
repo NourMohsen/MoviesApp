@@ -72,8 +72,10 @@ final Results model;
             ),
             Center(
               child: RatingBar.builder(
+                allowHalfRating: true,
+                ignoreGestures: true,
                 itemSize: 24,
-                initialRating: 3,
+                initialRating: (model.voteAverage??1)/2,
                 minRating: 1,
                 direction: Axis.horizontal,
                 itemCount: 5,
@@ -162,6 +164,7 @@ final Results model;
                             MaskedImage(
                               asset:kMaskCast,
                               mask: kMaskCast,
+                              isAsset: true,
                             ),
                             Padding(
                               padding: EdgeInsets.only(

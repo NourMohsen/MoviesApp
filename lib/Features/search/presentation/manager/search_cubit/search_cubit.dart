@@ -10,6 +10,7 @@ class SearchCubit extends Cubit<SearchState> {
   List<Results>searchMovies=[];
   Future<void> searchPlayers({required String query}) async {
     emit(SearchLoading());
+    searchMovies.clear();
     var result = await homeRepo.searchMovies(query: query);
     result.fold((failure) {emit(SearchFailure(failure.errMessage));},
             (searchPlayers){

@@ -6,8 +6,9 @@ import 'package:flutter/services.dart';
 class MaskedImage extends StatelessWidget {
   final String? asset;
   final String? mask;
+  final bool isAsset;
 
-  const MaskedImage({Key? key, @required this.asset, @required this.mask})
+  const MaskedImage({Key? key, @required this.asset, @required this.mask, required this.isAsset})
       : super(key: key);
 
   @override
@@ -17,12 +18,15 @@ class MaskedImage extends StatelessWidget {
         future: _createShaderAndImage(
             asset!, mask!, constraints.maxWidth, constraints.maxHeight),
         builder: (context, snapshot) {
-          if (!snapshot.hasData) return const SizedBox.shrink();
+         // if (!snapshot.hasData) return const SizedBox.shrink();
+          if (snapshot.connectionState==ConnectionState.waiting) {return const Center(child: CircularProgressIndicator());}
+          else if (snapshot.connectionState==ConnectionState.none) {return const SizedBox.shrink();}
+          else {
           return ShaderMask(
             blendMode: BlendMode.dstATop,
             shaderCallback: (rect) => snapshot.data![0],
-            child: snapshot.data![1],
-          );
+            child: snapshot.data![1]==snapshot.data![0]?"":snapshot.data![1],
+          );}
         },
       );
     });
@@ -30,7 +34,9 @@ class MaskedImage extends StatelessWidget {
 
   Future<List> _createShaderAndImage(
       String asset, String mask, double w, double h) async {
-    ByteData data = await rootBundle.load(asset);
+    final ByteData imageData =isAsset?await rootBundle.load(asset) :await NetworkAssetBundle(Uri.parse(asset)).load("");
+    ByteData data = imageData;
+   // ByteData data = await rootBundle.load(asset);
     ByteData maskData = await rootBundle.load(mask);
 
     Codec codec = await instantiateImageCodec(

@@ -35,8 +35,9 @@ class FeaturedMoviesListView extends StatelessWidget {
               height: 160,
               width: 142,
               child: MaskedImage(
-                asset: "assets/img-onboarding.png",
+                asset: 'https://m.media-amazon.com/images/M/MV5BODg3MzYwMjE4N15BMl5BanBnXkFtZTcwMjU5NzAzNw@@._V1_.jpg',
                 mask: mask,
+                isAsset: false,
               ),
             ),
           );

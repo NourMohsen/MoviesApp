@@ -19,7 +19,8 @@ class CustomMovieImage extends StatelessWidget {
           errorWidget: (context, url, error) => const Icon(
             Icons.error,
           ),
-        ),
+          progressIndicatorBuilder: (context, url, downloadProgress) =>
+              Center(child: CircularProgressIndicator(value: downloadProgress.progress)),),
       ),
     );
   }
